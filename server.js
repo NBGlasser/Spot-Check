@@ -40,8 +40,8 @@ app.set("view engine", "handlebars");
 // Routes
 // --------------------------------------------------- 
 
-// link the "oneday_controller.js" file
-var routes = require("./controllers/spotCheck_controller.js");
+// link the "spotCheck_controllers.js" file
+var routes = require("./controllers/spotCheck-controllers.js");
 app.use(routes);
 
 
