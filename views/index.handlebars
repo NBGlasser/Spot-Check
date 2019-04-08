@@ -1,0 +1,43 @@
+{{!-- main container --}}
+<div class="container">
+
+    {{!-- name of the app --}}
+    <div class="row mb-5 mt-3">
+        <div class="col-sm-12">
+            <h1 class="display-3"><span class="mr-4"><img src="/assets/images/spotcheck-logo.png" alt="logo-spotcheck" style="height: 75px"></span>Spot Check!</h1>
+        </div>
+    </div>
+
+    {{!-- map --}}
+    <div class="row mb-3">
+        <div class="col-sm-12">
+            <img id="map" class="img-fluid img-thumbnail" src="#" alt="map"/>
+        </div>
+    </div>
+
+    {{!-- buttons to park here or somewhere else--}}
+    <div class="row">
+        <div class="col-sm-12">
+            <button id="btn-here" class="btn btn-lg bg-success" type="submit" style="display:inline-block">Park here!</button>
+            <button id="btn-else" class="btn btn-lg bg-info" type="submit" style="display:inline-block">Park somewhere else!</button>
+        </div>
+    </div>
+
+    {{!-- card to list the results --}}
+    <div class="row mt-3 mx-auto">
+        <div class="col-sm-12">
+            <div id="card-results" class="card" style="display:none">
+                <div id="results-title" class="card-header">Results</div>
+                <div id="results-form" class="card-body">
+                    <ul class="list-group">
+                        {{!-- set up for partials when the dataset is done --}}
+                        {{!-- {{#each }} --}}
+                            {{!-- {{> }} --}}
+                        {{!-- {{/each}} --}}
+                    </ul>
+                </div>
+            </div> 
+        </div>
+    </div>
+
+</div>
