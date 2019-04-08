@@ -1,0 +1,22 @@
+#name-app {
+    font-size: 3rem;
+}
+
+#logo {
+    height: 75px;
+}
+
+/* media queries to hide the name on small screens and just display the logo */
+@media screen and (max-width: 450px) {
+    #name-app {
+        font-size: 2.5rem;
+    } 
+
+    #logo {
+        height: 65px;
+    }
+
+    #btn-occupied, #btn-free, #btn-recently {
+        font-size: 1rem;
+    }
+}

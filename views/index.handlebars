@@ -1,25 +1,38 @@
+{{!-- nav bar --}}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <span id="logo" class="mr-2"><img src="Spot-Check/public/assets/images/spotcheck-logo.png" alt="logo-spotcheck" style="height: 75px"></span><h1 id="name-app">Spot Check!</h1>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link text-dark mr-2" href="/">Near You</a>
+            </li>
+            <li class="nav-item">
+                <a id="destination" class="nav-link text-dark" href="/">Other Destination</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
 {{!-- main container --}}
 <div class="container text-center mx-auto">
 
-    {{!-- name of the app --}}
-    <div class="row mb-5 mt-3">
-        <div class="col-sm-12">
-            <h1 class="display-3"><span class="mr-4"><img src="/assets/images/spotcheck-logo.png" alt="logo-spotcheck" style="height: 75px"></span>Spot Check!</h1>
-        </div>
-    </div>
-
     {{!-- map --}}
-    <div class="row mb-3">
+    <div class="row mt-3 mb-3">
         <div class="col-sm-12">
             <img id="map" class="img-fluid img-thumbnail" src="#" alt="map"/>
         </div>
     </div>
 
-    {{!-- buttons to park here or somewhere else--}}
+    {{!-- buttons for the different kinds of parking --}}
     <div class="row">
         <div class="col-sm-12">
-            <button id="btn-here" class="btn btn-lg bg-success" type="submit" style="display:inline-block">Park here!</button>
-            <button id="btn-else" class="btn btn-lg bg-info" type="submit" style="display:inline-block">Park somewhere else!</button>
+            <button id="btn-occupied" class="btn btn-lg bg-danger mr-2 mt-2" type="submit" style="display:inline-block">Open > 30 min</button>
+            <button id="btn-free" class="btn btn-lg bg-success mr-2 mt-2" type="submit" style="display:inline-block">Recently Open</button>
+            <button id="btn-recently" class="btn btn-lg bg-warning mt-2" type="submit" style="display:inline-block">Open Soon</button>
         </div>
     </div>
 
