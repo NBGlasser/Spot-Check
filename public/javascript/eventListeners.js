@@ -41,9 +41,6 @@ $(function () {
     var currentUrl = window.location.origin
     var userLocation = {}
 
-    var currentUrl = window.location.origin
-    var pos = {}
-
     $("#login").on("click", function (event) {
         event.preventDefault();
 
@@ -51,18 +48,20 @@ $(function () {
             phoneNum: $("#phone-number").val(),
             // password: $("#password").val()
         }
+
+        $.ajax("/api/users", {
+            type: "POST",
+            data: userInfo
+        }).then(
+            function (data) {
+                if (data) {
+                    window.location = currentUrl + "/home"
+                }
+            }
+        )
     })
 
-    $.ajax("/api/USERS", {
-        type: "POST",
-        data: userInfo
-    }).then(
-        function (data) {
-            if (data) {
-                window.location = currentUrl + "/home"
-            }
-        }
-    )
+    
 
     $("#sumbit").on("click", function (event) {
         navigator.geolocation.getCurrentPosition(function (position) {
