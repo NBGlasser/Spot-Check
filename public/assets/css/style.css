@@ -6,6 +6,11 @@
     height: 75px;
 }
 
+#btn-search {
+    color: black;
+    font-size: 2rem;
+}
+
 /* media queries to hide the name on small screens and just display the logo */
 @media screen and (max-width: 450px) {
     #name-app {

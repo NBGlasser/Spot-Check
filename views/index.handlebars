@@ -8,10 +8,10 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link text-dark mr-2" href="/">Near You</a>
+                <a id="near-you" class="nav-link text-dark mr-2 font-weight-bold" href="/">Near You</a>
             </li>
             <li class="nav-item">
-                <a id="destination" class="nav-link text-dark" href="/">Other Destination</a>
+                <a id="destination" class="nav-link text-dark font-weight-bold" href="/">At Destination</a>
             </li>
         </ul>
     </div>
@@ -19,6 +19,21 @@
 
 {{!-- main container --}}
 <div class="container text-center mx-auto">
+
+    {{!-- search input box to enter the destination to display only if "displayForm" is true--}}
+    {{#if displayForm}}
+        <div class="row">
+            <div class="col-sm-12 col-md-8 col-lg-8 text-center mx-auto">
+                <form id="search-destination" class="mt-3 text-left" style="display:none">
+                    <div class="form-group">
+                        <label for="destination" class="font-weight-bold">Enter your destination</label>
+                        <input type="text" class="form-control float-left" id="destination" required>
+                        <button type="submit" class="btn"><i id="btn-search" class="fas fa-arrow-circle-right"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    {{/if}}
 
     {{!-- map --}}
     <div class="row mt-3 mb-3">
@@ -45,7 +60,7 @@
                     <ul class="list-group">
                         {{!-- set up for partials when the dataset is done --}}
                         {{!-- {{#each put-name-table-for-spots-info}} --}}
-                            {{!-- {{> spot-check }} --}}
+                            {{!-- {{> list-spots/spot-check }} --}}
                         {{!-- {{/each}} --}}
                     </ul>
                 </div>
