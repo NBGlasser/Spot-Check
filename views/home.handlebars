@@ -1,0 +1,70 @@
+{{!-- nav bar --}}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <span class="mr-2"><img id="logo" src="/assets/images/spotcheck-logo.png" alt="logo-spotcheck"></span><h1 id="name-app" class="mr-auto">Spotcheck</h1>
+    <button id="menu-button" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <div id="near-you" class="nav-link mr-2">Near You</div>
+            </li>
+            <li class="nav-item">
+                <div id="destination" class="nav-link">At Destination</div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+{{!-- main container --}}
+<div class="container text-center mx-auto">
+
+    {{!-- search input box to enter the destination to display only when "At destination" is clicked on --}}
+    <div class="row">
+        <div class="col-sm-12 col-md-8 col-lg-8 text-center mx-auto">
+            <form id="search-destination" class="mt-3 text-left" style="display:none">
+                <div class="form-group">
+                    <label for="destination" class="font-weight-bold">Enter your destination</label>
+                    <input type="text" class="form-control float-left" id="destination" required>
+                    <button type="submit" class="btn"><i id="btn-search" class="fas fa-arrow-circle-right"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+
+    {{!-- map --}}
+    <div class="row mt-4 mb-3">
+        <div class="col-sm-12">
+            <img id="map" class="img-fluid img-thumbnail" src="#" alt="map"/>
+        </div>
+    </div>
+
+    {{!-- buttons for the different kinds of parking --}}
+    <div class="row">
+        <div class="col-sm-12">
+            <button id="btn-occupied" class="btn btn-lg bg-danger mr-2 mt-2" type="submit">Open > 30 min</button>
+            <button id="btn-free" class="btn btn-lg bg-success mr-2 mt-2" type="submit">Recently Open</button>
+            <button id="btn-recently" class="btn btn-lg bg-warning mt-2" type="submit"x>Open Soon</button>
+        </div>
+    </div>
+
+    {{!-- card to list the results --}}
+    <div class="row mt-4">
+        <div class="col-sm-12 col-md-12 col-lg-10 text-center mx-auto">
+            <div id="card-results" class="card">
+                <div id="results-title" class="card-header font-weight-bold">Claim your spot!</div>
+                <div id="results-form" class="card-body">
+                    <ul class="list-group">
+                        {{!-- set up for partials when the dataset is done --}}
+                        {{#each put-name-table-for-spots-info}}
+                            {{> list-spots/spot-check }}
+                       {{/each}}
+                    </ul>
+                </div>
+            </div> 
+        </div>
+    </div>
+
+</div>

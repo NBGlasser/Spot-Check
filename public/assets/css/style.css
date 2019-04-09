@@ -1,0 +1,50 @@
+#name-app {
+    font-size: 3rem;
+    color: #0000ff;
+}
+
+#near-you, #destination {
+    color: #0000ff;
+}
+
+#results-title {
+    color: #0000ff;
+    font-size: 1.5rem;
+}
+
+#near-you:hover, #destination:hover {
+    font-weight: bold;
+}
+
+#logo {
+    height: 75px;
+}
+
+#btn-search {
+    color: black;
+    font-size: 2rem;
+}
+
+#login-btn {
+    background-color: #0000ff; 
+    color: white;
+}
+
+/* media queries to hide the name on small screens and just display the logo */
+@media screen and (max-width: 450px) {
+    #menu-button, #results-title {
+        font-size: 1rem; 
+    }
+
+    #name-app {
+        font-size: 2rem;
+    } 
+
+    #logo {
+        height: 60px;
+    }
+
+    #btn-occupied, #btn-free, #btn-recently {
+        font-size: 1rem;
+    }
+}
