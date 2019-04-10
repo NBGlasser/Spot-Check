@@ -1,17 +1,15 @@
 module.exports = function(sequelize, Datatypes) {
-    var users = sequelize.define("users", {
+    var user = sequelize.define("users", {
         phoneNumber: {
-            type: Datatypes.STRING,
+            type: Datatypes.text,
             allowNull: false,
-            validate: {
-                len: [10]
-            }
+            
         },
         password: {
             type: Datatypes.STRING,
             defaultValue: "password"
         }
-
     });
+    return user;
 
 };

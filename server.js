@@ -20,6 +20,11 @@ var app = express();
 // process.env.PORT lets the port be set by Heroku
 var PORT = process.env.PORT || 3000;
 
+// set up database for requiring all of our models
+var db = require("./models");
+
+
+
 // set up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -49,7 +54,10 @@ app.use(routes);
 // Start the server
 // --------------------------------------------------- 
 
-// so that it can begin listening to client requests.
-app.listen(PORT, function() {
-    console.log("App listening on: http://localhost:" + PORT);
-});
+// Syncing our sequelize models and then:
+// begin listening to client requests.
+db.sequelize.sync({ force: true }).then(function () {
+    app.listen(PORT, function () {
+        console.log("App listening on: http://localhost:" + PORT);
+    });
+})
