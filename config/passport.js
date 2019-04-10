@@ -13,7 +13,7 @@ passport.use(new LocalStrategy(
     {
         usernameField: "phoneNumber"
     },
-    function(phone, password, done){
+    function(phoneNumber, password, done){
         db.users.findOne({
             where: {
                 phoneNumber: phoneNumber
@@ -24,10 +24,16 @@ passport.use(new LocalStrategy(
                     message: "Incorrect phone number."
                 });
             }
+            else if (!dbUser.validPassword(password)) {
+                return done(null, false, {
+                  message: "Incorrect password."
+                });
+              }
 
             return done(null, dbUser);
         });
     }
+    
 ));
 
 passport.serializeUser(function(user, cb){

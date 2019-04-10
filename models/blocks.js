@@ -1,13 +1,10 @@
 module.exports = function(sequelize, DataTypes) {
     var blocks = sequelize.define("blocks", {
-        Name: {
-        type: DataTypes.STRING,
+        name: {
+        type: DataTypes.TEXT,
         allowNull: false
         },
-        Comment: DataTypes.STRING,
-        validate: {
-            len: [0,280]
-        }
+        Comment: DataTypes.TEXT
     });
 
     return blocks;
