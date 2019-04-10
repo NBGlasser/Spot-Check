@@ -47,18 +47,18 @@ $(document).ready(function() {
         event.preventDefault();
 
         var userInfo = {
-            phoneNum: $("#phone-number").val(),
+            phoneNum: $("#phone-number").val().trim(),
             // password: $("#password").val()
         }
-
+        
         $.ajax("/api/users", {
             type: "POST",
             data: userInfo
         }).then(
             function (data) {
-                if (data) {
+                // if (data) {
                     window.location = currentUrl + "/home"
-                }
+                // }
             }
         )
     })

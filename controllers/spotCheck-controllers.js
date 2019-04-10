@@ -28,7 +28,7 @@ router.get("/home", function(req, res) {
 
 // to store the phone number into the users model
 router.post("/api/users", function(req, res) {
-
+    console.log(req.body.phoneNum);
     res.end();
 });
 
