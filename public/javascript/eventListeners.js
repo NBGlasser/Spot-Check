@@ -76,27 +76,27 @@ $(document).ready(function () {
 
 
         $("#submit").on("click", function (event) {
-        
+
             navigator.geolocation.getCurrentPosition(function (position) {
 
                 userLocation = {
                     lat = position.coords.latitude,
                     long = position.coords.longitude
                 }
-        
 
-            $.ajax("/api/spots", {
-                type: "POST",
-                data: userInfo
-            }).then(
-                window.location = currentUrl + "/home"
-            )
 
-            $.ajax("/api/history", {
-                type: "POST",
-                data: userInfo
+                $.ajax("/api/spots", {
+                    type: "POST",
+                    data: userInfo
+                }).then(
+                    window.location = currentUrl + "/home"
+                )
+
+                $.ajax("/api/history", {
+                    type: "POST",
+                    data: userInfo
+                })
             })
-        })
         })
 
         $("#search").on("click", function (event) {
@@ -108,30 +108,30 @@ $(document).ready(function () {
                 }
 
                 var lat1;
-            var lat2;
-            var long1;
-            var long2;
+                var lat2;
+                var long1;
+                var long2;
 
 
 
-            lat1 = userLocation.lat + .000000000001
-            lat2 = userLocation.lat - .000000000001
-            long1 = userLocation.long + .000000000001
-            long2 = userLocation.long - .000000000001
+                lat1 = userLocation.lat + .000000000001
+                lat2 = userLocation.lat - .000000000001
+                long1 = userLocation.long + .000000000001
+                long2 = userLocation.long - .000000000001
 
-            $.get("/api/spots/" + lat1 + "/" + lat2 + "/" + long1 + "/" + long2, function (data) {
-                console.log(data)
+                $.get("/api/spots/" + lat1 + "/" + lat2 + "/" + long1 + "/" + long2, function (data) {
+                    console.log(data)
 
-                for (var i = 0; i < data.length; i++) {
-                    //===================== CHECK THE JSON WHEN WE MERGE=================//
-                    var coords = data[i].coordinates;
-                    var latLng = new google.maps.LatLng(coords[1], coords[0]);
-                    var marker = new google.maps.Marker({
-                        position: latLng,
-                        map: map
-                    });
-                }
-            })
+                    for (var i = 0; i < data.length; i++) {
+                        //===================== CHECK THE JSON WHEN WE MERGE=================//
+                        var coords = data[i].coordinates;
+                        var latLng = new google.maps.LatLng(coords[1], coords[0]);
+                        var marker = new google.maps.Marker({
+                            position: latLng,
+                            map: map
+                        });
+                    }
+                })
 
             })
 
