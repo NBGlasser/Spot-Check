@@ -7,7 +7,7 @@ module.exports = function(sequelize, Datatypes) {
             allowNull: false,
             unique: true,
             validate: {
-                len: [10]
+                len: [13]
             }
         },
         password: {
@@ -22,9 +22,9 @@ module.exports = function(sequelize, Datatypes) {
         return bcrypt.compareSync(password, this.password);
     };
 
-    users.hook("beforeCreate", function(user){
-        user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
-    });
+    // users.hook("beforeCreate", function(user){
+    //     user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
+    // });
 
     return users;
 

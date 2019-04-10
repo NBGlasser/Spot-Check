@@ -40,8 +40,47 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 // load the page before running anything else
 $(document).ready(function() {
   
-  var currentUrl = window.location.origin
-  var userLocation = {}
+    var currentUrl = window.location.origin
+    var userLocation = {}
+
+    // ------------------- Sophie ----------------------
+
+    // event listener on the "register" form
+    $("#register-form").on("submit", function (event) {
+        event.preventDefault();
+
+        // grab the two password inputs
+        var pwd = $("#password").val().trim();
+        var pwdConfirm = $("#password-confirm").val().trim();
+
+        // compare the two password inputs
+        if (pwd !== pwdConfirm) {
+            $("#pwd-warning").attr("style", "display:block");
+        } else {
+
+            var newUserInfo = {
+                phoneNum: $("#phone-number").val().trim(),
+                password: pwd,
+            }
+
+            // post request to create a new user data point into the "users" table
+            $.ajax("/api/new-user", {
+                type: "POST",
+                data: newUserInfo
+            }).then(
+                function (data) {
+                    // if (data) {
+                        // location.replace("/login");
+                        window.location = currentUrl + "/login"
+                    // }
+                }
+            );
+
+        }
+    });
+
+    // -------------------------------------------------
+
 
     $("#login-form").on("submit", function (event) {
         event.preventDefault();
@@ -57,11 +96,12 @@ $(document).ready(function() {
         }).then(
             function (data) {
                 // if (data) {
+                    // location.replace("/home");
                     window.location = currentUrl + "/home"
                 // }
             }
         )
-    })
+    });
 
     
 
@@ -79,7 +119,8 @@ $(document).ready(function() {
         }).then(
             window.location = currentUrl + "/home"
         )
-    })
+    });
+
 
     $("#search").on("click", function (event) {
         $.get("/api/spots", function (data) {
@@ -95,7 +136,7 @@ $(document).ready(function() {
                 });
             }
         })
-    })
+    });
 
     // event listener on the "submit" button on the login page
 //     $("#login-form").on("submit", function(event) {
@@ -123,10 +164,9 @@ $(document).ready(function() {
     // display the "search-destination" bar for "At Destination" option
     $("#destination").on("click", function() {
         $("#search-destination").attr("style", "display:block");
-    })
+    });
 
 
 
     
 });
-
