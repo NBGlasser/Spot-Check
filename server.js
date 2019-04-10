@@ -4,19 +4,18 @@
 
 // load the Express node package
 var express = require("express");
-var bodyParser = require("body-parser");
-var session = require("express-session");
+// var bodyParser = require("body-parser");
+// var session = require("express-session");
 // load the handlebars node package for Express
 var exphbs = require("express-handlebars");
-// link the "spotCheck_controllers.js" file
-var routes = require("./controllers/spotCheck-controllers.js");
+
 // set the port of the application
 var PORT = process.env.PORT || 3000;
 var db = require("./models");
 var http = require("http");
 var passport = require("passport");
 var passportConfig = require("./config/passport");
-var cookieParser = require("cookie-parser");
+// var cookieParser = require("cookie-parser");
 // ---------------------------------------------------
 // Configuration of the Express app
 // --------------------------------------------------- 
@@ -38,15 +37,19 @@ app.set("view engine", "handlebars");
 // ---------------------------------------------------
 // Routes
 // --------------------------------------------------- 
+
+// link the "spotCheck_controllers.js" file
+var routes = require("./controllers/spotCheck-controllers.js");
+
 app.use(routes);
 
 // Other express libraries
-app.use(express.bodyParser());
-app.use(express.cookieParser());
-app.use(express.session({ secret: 'ourpasswordissophie' }));
+// app.use(express.bodyParser());
+// app.use(express.cookieParser());
+// app.use(express.session({ secret: 'ourpasswordissophie' }));
 app.use(passport.initialize());
-app.use(passport.session());
-app.use(app.router);
+// app.use(passport.session());
+// app.use(app.router);
 
 // ---------------------------------------------------
 // Start the server
