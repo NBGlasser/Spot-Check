@@ -94,7 +94,7 @@ $(document).ready(function() {
                 long1 = position.coords.longitude + .000000000001
                 long2 = position.coords.longitude - .000000000001
         }).then(
-            $.get("/api/spots/:" + lat1 + "/:" + lat2 + "/:" + long1 + "/:" + long2, function (data) {
+            $.get("/api/spots/" + lat1 + "/" + lat2 + "/" + long1 + "/" + long2, function (data) {
             console.log(data)
 
             for (var i = 0; i < data.length; i++) {
