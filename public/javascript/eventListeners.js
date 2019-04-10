@@ -82,7 +82,21 @@ $(document).ready(function() {
     })
 
     $("#search").on("click", function (event) {
-        $.get("/api/spots", function (data) {
+        var lat1;
+        var lat2;
+        var long1;
+        var long2;
+
+        navigator.geolocation.getCurrentPosition(function (position) {
+            
+                lat1 = position.coords.latitude + .000000000001
+                lat2 = position.coords.latitude - .000000000001
+                long1 = position.coords.longitude + .000000000001
+                long2 = position.coords.longitude - .000000000001
+        })
+
+
+        $.get("/api/spots/:" + lat1 + "/:" + lat2 + "/:" + long1 + "/:" + long2, function (data) {
             console.log(data)
 
             for (var i = 0; i < data.length; i++) {
