@@ -2,7 +2,7 @@ var map, infoWindow;
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: { lat: -0, lng: 0 },
-        zoom: 6
+        zoom: 4
     });
     infoWindow = new google.maps.InfoWindow;
 
@@ -93,10 +93,8 @@ $(document).ready(function() {
                 lat2 = position.coords.latitude - .000000000001
                 long1 = position.coords.longitude + .000000000001
                 long2 = position.coords.longitude - .000000000001
-        })
-
-
-        $.get("/api/spots/:" + lat1 + "/:" + lat2 + "/:" + long1 + "/:" + long2, function (data) {
+        }).then(
+            $.get("/api/spots/:" + lat1 + "/:" + lat2 + "/:" + long1 + "/:" + long2, function (data) {
             console.log(data)
 
             for (var i = 0; i < data.length; i++) {
@@ -109,6 +107,10 @@ $(document).ready(function() {
                 });
             }
         })
+        )
+
+
+        
     })
 
     // event listener on the "submit" button on the login page
