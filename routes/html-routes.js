@@ -21,6 +21,11 @@ router.get("/", function(req, res) {
     res.render("index");
 });
 
+router.get("/signup", function(req, res) {
+    res.render("signup");
+});
+
+
 // define the route to display the page with the map and the spots
 router.get("/home", function(req, res) {
     res.render("home");

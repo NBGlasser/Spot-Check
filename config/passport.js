@@ -20,8 +20,22 @@ passport.use(new LocalStrategy(
             }
         }).then(function(dbUser){
             if(!dbUser){
-                return
+                return done(null, false,{
+                    message: "Incorrect phone number."
+                });
             }
-        })
+
+            return done(null, dbUser);
+        });
     }
-))
+));
+
+passport.serializeUser(function(user, cb){
+    cb(null, user);
+});
+
+passport.deserializeUser(function(obj, cb){
+    cb(null, obj);
+});
+
+module.exports = passport;

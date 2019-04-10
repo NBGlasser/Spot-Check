@@ -1,0 +1,22 @@
+{{!-- nav bar --}}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <span class="mr-2"><img id="logo" src="/assets/images/spotcheck-logo.png" alt="logo-spotcheck"></span>
+    <h1 id="name-app" class="mr-auto">Spot Check!</h1>
+</nav>
+
+<form class="form-signin" action="/users/register" method="POST">
+  <h2 class="form-signin-heading">Please sign up</h2>
+ 
+  <label for="inputEmail" class="sr-only">Phone Number</label>
+  <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address" required autofocus>
+ 
+  <label for="inputPassword" class="sr-only">Password</label>
+  <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
+ 
+  <label for="inputConfirmPassword" class="sr-only">Confirm Password</label>
+  <input type="password" id="inputConfirmPassword" name="confirmationPassword" class="form-control" placeholder="Confirm Password" required>
+ 
+  <br/>
+ 
+  <button class="btn btn-lg btn-default btn-block" type="submit">Sign up</button>
+</form>
