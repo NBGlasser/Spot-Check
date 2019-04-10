@@ -2,7 +2,7 @@ var map, infoWindow;
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: { lat: -0, lng: 0 },
-        zoom: 6
+        zoom: 4
     });
     infoWindow = new google.maps.InfoWindow;
 
@@ -42,7 +42,7 @@ $(document).ready(function() {
   
     var currentUrl = window.location.origin
     var userLocation = {}
-
+    
     // ------------------- Sophie ----------------------
 
     // event listener on the "register" form
@@ -82,84 +82,115 @@ $(document).ready(function() {
     // -------------------------------------------------
 
 
-    $("#login-form").on("submit", function (event) {
-        event.preventDefault();
-
-        var userInfo = {
-            phoneNum: $("#phone-number").val().trim(),
-            // password: $("#password").val()
-        }
-        
-        $.ajax("/api/users", {
-            type: "POST",
-            data: userInfo
-        }).then(
-            function (data) {
-                // if (data) {
-                    // location.replace("/home");
-                    window.location = currentUrl + "/home"
-                // }
-            }
-        )
-    });
-
+   
     
+    navigator.geolocation.getCurrentPosition(function (position) {
 
-    $("#submit").on("click", function (event) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-            userLocation = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-            };
-
-        })
-        $.ajax("/api/spots", {
-            type: "POST",
-            data: userLocation
-        }).then(
-            window.location = currentUrl + "/home"
-        )
-    });
+        userLocation = {
+            lat = position.coords.latitude,
+            long = position.coords.longitude
+        }
 
 
-    $("#search").on("click", function (event) {
-        $.get("/api/spots", function (data) {
-            console.log(data)
+        $("#login-form").on("submit", function (event) {
+            event.preventDefault();
 
-            for (var i = 0; i < data.length; i++) {
-                //===================== CHECK THE JSON WHEN WE MERGE=================//
-                var coords = data[i].coordinates;
-                var latLng = new google.maps.LatLng(coords[1], coords[0]);
-                var marker = new google.maps.Marker({
-                    position: latLng,
-                    map: map
-                });
+            var userInfo = {
+                phoneNum: $("#phone-number").val(),
+                password: $("#password").val(),
+                timeStamp: moment().format(),
+                lat: userLocation.lat,
+                long: userLocation.long
             }
+
+            $.ajax("/api/history", {
+                    type: "POST",
+                    data: userInfo
+                })
+          
+          
+//             $.ajax("/api/users", {
+//                 type: "POST",
+//                 data: userInfo
+//             }).then(
+//                 function (data) {
+//                     if (data) {
+//                         window.location = currentUrl + "/home"
+//                     }
+//                 }
+//             )
+//         })
+          })
+
+
+
+        $("#submit").on("click", function (event) {
+
+            navigator.geolocation.getCurrentPosition(function (position) {
+
+                userLocation = {
+                    lat = position.coords.latitude,
+                    long = position.coords.longitude
+                }
+
+
+//                 $.ajax("/api/spots", {
+//                     type: "POST",
+//                     data: userInfo
+//                 }).then(
+//                     window.location = currentUrl + "/home"
+//                 )
+
+              $.ajax("/api/spots", {
+                type: "POST",
+                data: userLocation
+            }).then(
+              window.location = currentUrl + "/home"
+            )
+          });
+
+
+        $("#search").on("click", function (event) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+
+                userLocation = {
+                    lat = position.coords.latitude,
+                    long = position.coords.longitude
+                }
+
+                var lat1;
+                var lat2;
+                var long1;
+                var long2;
+
+
+
+                lat1 = userLocation.lat + .000000000001
+                lat2 = userLocation.lat - .000000000001
+                long1 = userLocation.long + .000000000001
+                long2 = userLocation.long - .000000000001
+
+                $.get("/api/spots/" + lat1 + "/" + lat2 + "/" + long1 + "/" + long2, function (data) {
+                    console.log(data)
+
+                    for (var i = 0; i < data.length; i++) {
+                        //===================== CHECK THE JSON WHEN WE MERGE=================//
+                        var coords = data[i].coordinates;
+                        var latLng = new google.maps.LatLng(coords[1], coords[0]);
+                        var marker = new google.maps.Marker({
+                            position: latLng,
+                            map: map
+                        });
+                    }
+                })
+
+            })
+
+
         })
-    });
-
-    // event listener on the "submit" button on the login page
-//     $("#login-form").on("submit", function(event) {
-//         // prevent the page to refresh
-//         event.preventDefault();
-
-//         // grab the user phone number and store it in a variable
-//         var phoneNumber = $("#phone-number").val().trim();
-        
-//         // post request to enter the data into the database
-//         $.post("/api/users", phoneNumber, function() {
-//             // very short-live confirmation message in the browser's console
-//             console.log("created new user");
-//             // display the home page with map and spots
-//             location.replace("/home");
-//         });
 
 //     });
 
-    // hide the "search-destination" bar for "near you" option
-    $("#near-you").on("click", function() {
-        $("#search-destination").attr("style", "display:none");
-    });
 
     // display the "search-destination" bar for "At Destination" option
     $("#destination").on("click", function() {
@@ -167,6 +198,14 @@ $(document).ready(function() {
     });
 
 
+        // hide the "search-destination" bar for "near you" option
+        $("#near-you").on("click", function () {
+            $("#search-destination").attr("style", "display:none");
+        });
 
-    
+
+
+    })
+
+
 });
