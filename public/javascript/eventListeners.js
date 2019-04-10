@@ -42,7 +42,13 @@ $(document).ready(function() {
   
     var currentUrl = window.location.origin
     var userLocation = {}
-    
+
+    navigator.geolocation.getCurrentPosition(function (position) {
+
+        userLocation = {
+            lat: position.coords.latitude,
+            long: position.coords.longitude
+        }
     // ------------------- Sophie ----------------------
 
     // event listener on the "register" form
@@ -61,6 +67,10 @@ $(document).ready(function() {
             var newUserInfo = {
                 phoneNum: $("#phone-number").val().trim(),
                 password: pwd,
+                timeStamp: moment().format(),
+                lat: userLocation.lat,
+                long: userLocation.long
+
             }
 
             // post request to create a new user data point into the "users" table
@@ -69,10 +79,11 @@ $(document).ready(function() {
                 data: newUserInfo
             }).then(
                 function (data) {
-                    // if (data) {
+                    if (data) {
                         // location.replace("/login");
-                        window.location = currentUrl + "/login"
-                    // }
+                        console.log("this is the data response ")
+                        window.location = currentUrl + "/home"
+                    }
                 }
             );
 
@@ -81,15 +92,6 @@ $(document).ready(function() {
 
     // -------------------------------------------------
 
-
-   
-    
-    navigator.geolocation.getCurrentPosition(function (position) {
-
-        userLocation = {
-            lat = position.coords.latitude,
-            long = position.coords.longitude
-        }
 
 
         $("#login-form").on("submit", function (event) {
@@ -129,8 +131,8 @@ $(document).ready(function() {
             navigator.geolocation.getCurrentPosition(function (position) {
 
                 userLocation = {
-                    lat = position.coords.latitude,
-                    long = position.coords.longitude
+                    lat: position.coords.latitude,
+                    long: position.coords.longitude
                 }
 
 
@@ -154,8 +156,8 @@ $(document).ready(function() {
             navigator.geolocation.getCurrentPosition(function (position) {
 
                 userLocation = {
-                    lat = position.coords.latitude,
-                    long = position.coords.longitude
+                    lat: position.coords.latitude,
+                    long: position.coords.longitude
                 }
 
                 var lat1;
@@ -207,5 +209,7 @@ $(document).ready(function() {
 
     })
 
+
+});
 
 });

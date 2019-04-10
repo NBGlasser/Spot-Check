@@ -1,19 +1,19 @@
-module.exports = function (sequelize, Datatypes) {
+module.exports = function (sequelize, DataTypes) {
     var history = sequelize.define("history", {
         phoneNumber: {
-            type: Datatypes.text,
+            type: DataTypes.TEXT,
             allowNull: false,
 
         },
 
         lat: {
-            type: Datatypes.float
+            type: DataTypes.FLOAT
         },
         long: {
-            type: Datatypes.float
+            type: DataTypes.FLOAT
         },
         timeStamp: {
-            type: Datatypes.string
+            type: DataTypes.STRING
         }
 
     });

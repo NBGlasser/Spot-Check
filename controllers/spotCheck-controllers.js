@@ -6,7 +6,7 @@
 var express = require("express");
 
 // load our models
-// var thing = require("../models/name-model");
+var db = require("../models");
 
 
 // ---------------------------------------------------
@@ -42,8 +42,8 @@ router.get("/api/spots/:lat1/:lat2/:long1/:long2", function (req, res) {
 
 // Louis
 // edited to store to store the phone number into the users model
-router.post("/api/new-users", function (req, res) {
-
+router.post("/api/new-user", function (req, res) {
+    console.log("hello post worked ")
     var userInfo = {
         phoneNumber: req.body.phoneNum,
         password: req.body.password
