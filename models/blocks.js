@@ -1,4 +1,4 @@
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
     var blocks = sequelize.define("blocks", {
         Name: {
             type: DataTypes.STRING,
@@ -7,8 +7,9 @@ module.exports = function(sequelize, DataTypes) {
         Comment: {
             type: DataTypes.STRING,
             validate: {
-                len: [0,280]
+                len: [0, 280]
             }
+
         }
     });
 
