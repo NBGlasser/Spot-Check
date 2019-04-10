@@ -7,12 +7,12 @@
 {{!-- main container --}}
 <div class="container text-center mx-auto">
 
-    {{!-- card to register --}}
+    {{!-- card to log in --}}
     <div class="row mt-4">
         <div class="col-sm-12 col-md-8 col-lg-8 text-center mx-auto">
             <div class="card">
                 <div class="card-body">
-                    <form id="register-form" class="mt-3 text-left">
+                    <form id="login-form" class="mt-3 text-left">
                         <div class="form-group">
                             <label for="phone-number">Enter your phone number</label>
                             <input type="text" class="form-control bfh-phone" data-format="ddd-ddd-dddd" id="phone-number" required>
@@ -22,16 +22,10 @@
                             <label for="password">Enter your password</label>
                             <input type="password" class="form-control" id="password" required>
                         </div>
-                        <div class="form-group">
-                            <label for="password-confirm">Confirm your password</label>
-                            <input type="password" class="form-control" id="password-confirm" required>
-                            <small id="pwd-warning" class="form-text text-danger" style="display:none">Your password doesn't match!</small>
-                        </div>
-                        <button id="register-btn" type="submit" class="btn">Register</button>
+                        <button id="login-btn" type="submit" class="btn">Log in!</button>
                     </form>
                 </div>
             </div>
-            <a href="/login">Already part of the park-happy communauty? Click me to log in!</a>
         </div>
     </div>
 
