@@ -133,12 +133,14 @@ $(document).ready(function () {
                 var long1;
                 var long2;
 
-
+                console.log("this is user lat " + lat)
 
                 lat1 = userLocation.lat + .05
                 lat2 = userLocation.lat - .05
                 long1 = userLocation.long + .05
                 long2 = userLocation.long - .05
+
+                console.log("this is lat1 " + lat1)
 
                 $.get("/api/spots/" + lat1 + "/" + lat2 + "/" + long1 + "/" + long2, function (data) {
                     console.log(data)

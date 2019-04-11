@@ -16,6 +16,9 @@ var db = require("../models");
 // create an object to perform the routing functions
 var router = express.Router();
 
+var Sequelize = require("sequelize");
+var Op = Sequelize.Op
+
 // define the route to display the "register" page
 router.get("/", function (req, res) {
     res.render("index");
@@ -55,13 +58,23 @@ router.get("/api/spots", function (req, res) {
 // Louis
 // define route to pull the spots to display on the map and the spots
 router.get("/api/spots/:lat1/:lat2/:long1/:long2", function (req, res) {
-    db.spots.findAll({
-        where: {
-            [Op.and]: [
-                {lat: { [Op.between]: [req.params.lat1, req.params.lat2] }},
-                {long: {[Op.between]: [req.params.long1, req.params.long2]}}
-            ]
-        }
+    var lat1 = req.params.lat1;
+    var lat2 = req.params.lat2;
+    var long1  = "-" + req.params.long1;
+    var long2  = "-" + req.params.long2;
+
+    var where ={
+         where: {
+            latitude: {[Op.between]: [lat1, lat2] },
+            longitude: {[Op.between]: [long2, long1]}
+         }
+    }
+    
+    
+    console.log("this is the param 1 " + where)
+    db.spots.findAll(where).then(function (dbSearchSpots) {
+        console.log("this is dbsearchspots " + dbSearchSpots);
+        res.json(dbSearchSpots);
     });
 })
 // Louis
