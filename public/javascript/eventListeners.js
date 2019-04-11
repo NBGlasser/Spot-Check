@@ -87,6 +87,10 @@ $(document).ready(function () {
             //         })
         })
 
+        $("#search-destination").on("submit", function (event) {
+            var queryURL = "/maps.googleapis.com/maps/api/geocode/json?address=" + "1600+Amphitheatre+Parkway,+Mountain+View,+CA +" + "&key=AIzaSyBLbZS2RmuzjLUIzfK3zrTLbKybGkcaD-E"
+
+        })
 
 
         $("#submit").on("click", function (event) {
@@ -131,18 +135,17 @@ $(document).ready(function () {
 
 
 
-                lat1 = userLocation.lat + .000000000001
-                lat2 = userLocation.lat - .000000000001
-                long1 = userLocation.long + .000000000001
-                long2 = userLocation.long - .000000000001
+                lat1 = userLocation.lat + .0000001
+                lat2 = userLocation.lat - .0000001
+                long1 = userLocation.long + .0000001
+                long2 = userLocation.long - .0000001
 
                 $.get("/api/spots/" + lat1 + "/" + lat2 + "/" + long1 + "/" + long2, function (data) {
                     console.log(data)
 
                     for (var i = 0; i < data.length; i++) {
                         //===================== CHECK THE JSON WHEN WE MERGE=================//
-                        var coords = data[i].coordinates;
-                        var latLng = new google.maps.LatLng(coords[1], coords[0]);
+                        var latLng = new google.maps.LatLng(data[i].latitude, data[i].longitude);
                         var marker = new google.maps.Marker({
                             position: latLng,
                             map: map
