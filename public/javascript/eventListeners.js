@@ -192,6 +192,9 @@ $(document).ready(function () {
             }
 
 
+
+                $.get("/api/spots/" + lat1 + "/" + lat2 + "/" + long1 + "/" + long2, function (data) {
+                    console.log(data)
             //                 $.ajax("/api/spots", {
             //                     type: "POST",
             //                     data: userInfo
