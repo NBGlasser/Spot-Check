@@ -60,12 +60,14 @@ router.post("/api/new-user", function (req, res) {
         long: req.body.long,
         timeStamp: req.body.timeStamp
     }
+    console.log(historyInfo);
+
 
     db.users.create(userInfo).then(function(dbUser) {
         db.history.create(historyInfo).then(function(dbHist) {
             res.json(dbUser);
-            console.log(dbUser);
-            console.log(dbHist);
+            console.log("user data");
+            console.log("hist data");
 
         });
          
