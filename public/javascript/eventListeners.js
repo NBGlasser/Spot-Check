@@ -135,10 +135,10 @@ $(document).ready(function () {
 
 
 
-                lat1 = userLocation.lat + .0000001
-                lat2 = userLocation.lat - .0000001
-                long1 = userLocation.long + .0000001
-                long2 = userLocation.long - .0000001
+                lat1 = userLocation.lat + .05
+                lat2 = userLocation.lat - .05
+                long1 = userLocation.long + .05
+                long2 = userLocation.long - .05
 
                 $.get("/api/spots/" + lat1 + "/" + lat2 + "/" + long1 + "/" + long2, function (data) {
                     console.log(data)
