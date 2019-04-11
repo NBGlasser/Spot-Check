@@ -41,6 +41,8 @@ $(document).ready(function () {
         })
     }
 
+    nearMe()
+
     // navigator.geolocation.getCurrentPosition(function (position) {
 
     //     userLocation = {
@@ -54,7 +56,8 @@ $(document).ready(function () {
     // event listener on the "register" form
     $("#register-form").on("submit", function (event) {
         event.preventDefault();
-
+        // nearMe()
+        console.log(userLocation);
         // grab the two password inputs
         var pwd = $("#password").val().trim();
         var pwdConfirm = $("#password-confirm").val().trim();
@@ -83,7 +86,7 @@ $(document).ready(function () {
                         // location.replace("/login");
                         console.log("this is the data response ")
                         window.location = currentUrl + "/home"
-                        nearMe()
+                        
                     }
                 }
             );
@@ -97,6 +100,7 @@ $(document).ready(function () {
 
     $("#login-form").on("submit", function (event) {
         event.preventDefault();
+        nearMe()
 
         var userInfo = {
             phoneNum: $("#phone-number").val(),
@@ -110,7 +114,7 @@ $(document).ready(function () {
             type: "POST",
             data: userInfo
         })
-        nearMe()
+        
 
 
         //             $.ajax("/api/users", {
