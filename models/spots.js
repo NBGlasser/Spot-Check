@@ -1,11 +1,11 @@
 module.exports = function(sequelize, DataTypes) {
     var spots = sequelize.define("spots", {
         latitude: {
-            type: DataTypes.FLOAT(11,7),
+            type: DataTypes.DECIMAL(11,7),
             allowNull: false
         },
         longitude: {
-            type: DataTypes.FLOAT(11,7),
+            type: DataTypes.DECIMAL(11,7),
             allowNull: false
         },
         occupied: {

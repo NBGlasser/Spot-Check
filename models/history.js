@@ -7,10 +7,10 @@ module.exports = function (sequelize, DataTypes) {
         },
 
         lat: {
-            type: DataTypes.FLOAT(11,7)
+            type: DataTypes.DECIMAL(11,7)
         },
         long: {
-            type: DataTypes.FLOAT(11,7)
+            type: DataTypes.DECIMAL(11,7)
         },
         timeStamp: {
             type: DataTypes.STRING
