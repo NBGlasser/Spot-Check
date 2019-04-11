@@ -86,7 +86,7 @@ $(document).ready(function () {
                         // location.replace("/login");
                         console.log("this is the data response ")
                         window.location = currentUrl + "/home"
-                        
+
                     }
                 }
             );
@@ -114,7 +114,7 @@ $(document).ready(function () {
             type: "POST",
             data: userInfo
         })
-        
+
 
 
         //             $.ajax("/api/users", {
@@ -193,21 +193,22 @@ $(document).ready(function () {
 
 
 
-                $.get("/api/spots/" + lat1 + "/" + lat2 + "/" + long1 + "/" + long2, function (data) {
-                    console.log(data)
-            //                 $.ajax("/api/spots", {
-            //                     type: "POST",
-            //                     data: userInfo
-            //                 }).then(
-            //                     window.location = currentUrl + "/home"
-            //                 )
+            $.get("/api/spots/" + lat1 + "/" + lat2 + "/" + long1 + "/" + long2, function (data) {
+                console.log(data)
+                //                 $.ajax("/api/spots", {
+                //                     type: "POST",
+                //                     data: userInfo
+                //                 }).then(
+                //                     window.location = currentUrl + "/home"
+                //                 )
 
-            $.ajax("/api/spots", {
-                type: "POST",
-                data: userLocation
-            }).then(
-                window.location = currentUrl + "/home"
-            )
+                $.ajax("/api/spots", {
+                    type: "POST",
+                    data: userLocation
+                }).then(
+                    window.location = currentUrl + "/home"
+                )
+            });
         });
     });
 
@@ -224,5 +225,6 @@ $(document).ready(function () {
     $("#near-you").on("click", function () {
         $("#search-destination").attr("style", "display:none");
     });
-    // });
+
+
 });
