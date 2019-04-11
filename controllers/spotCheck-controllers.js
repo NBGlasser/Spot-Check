@@ -31,6 +31,15 @@ router.get("/home", function (req, res) {
     res.render("home");
 });
 
+// =================== Sophie ================================
+
+// define the route to display the spot info once the user has claimed the spot
+router.get("/spot-claimed", function (req, res) {
+    res.render("spot-claimed");
+});
+
+// ===========================================================
+
 // Louis
 // define route to pull the spots to display on the map and the spots
 router.get("/api/spots/:lat1/:lat2/:long1/:long2", function (req, res) {
