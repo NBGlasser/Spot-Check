@@ -147,6 +147,12 @@ $(document).ready(function () {
             url: queryURL,
             method: "GET"
         }).then(function (response) {
+
+            var newLoc = {
+                lat: response.results.geometry.location.lat,
+                lng: response.results.geometry.location.lng
+            }
+
             lat1 = response.results.geometry.location.lat + .05
             lat2 = response.results.geometry.location.lat - .05
             long1 = response.results.geometry.location.lng + .05
@@ -162,6 +168,7 @@ $(document).ready(function () {
                         map: map
                     });
                 }
+                map.setCenter(newLoc)
             })
 
         })
