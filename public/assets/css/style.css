@@ -3,16 +3,16 @@
     color: #0000ff;
 }
 
-#near-you, #destination {
+#near-you, #destination, #spot-claimed {
     color: #0000ff;
 }
 
-#results-title {
+#results-title, #spot-claimed-title {
     color: #0000ff;
     font-size: 1.5rem;
 }
 
-#near-you:hover, #destination:hover {
+#near-you:hover, #destination:hover, #spot-claimed:hover {
     font-weight: bold;
 }
 
