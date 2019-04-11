@@ -40,6 +40,18 @@ router.get("/spot-claimed", function (req, res) {
 
 // ===========================================================
 
+
+// ===================Louis===================================
+
+router.get("/api/spots", function (req, res) {
+    db.spots.findAll({
+    }).then(function (dbSpots) {
+        res.json(dbSpots);
+    });
+})
+
+// ==============================================================
+
 // Louis
 // define route to pull the spots to display on the map and the spots
 router.get("/api/spots/:lat1/:lat2/:long1/:long2", function (req, res) {
