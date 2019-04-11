@@ -4,6 +4,43 @@ $(document).ready(function () {
     var currentUrl = window.location.origin;
     var userLocation = {};
 
+    function nearMe() {
+        
+        navigator.geolocation.getCurrentPosition(function (position) {
+
+            userLocation = {
+                lat: position.coords.latitude,
+                long: position.coords.longitude
+            }
+
+            var lat1;
+            var lat2;
+            var long1;
+            var long2;
+
+
+
+            lat1 = userLocation.lat + .05
+            lat2 = userLocation.lat - .05
+            long1 = userLocation.long + .05
+            long2 = userLocation.long - .05
+
+            $.get("/api/spots/" + lat1 + "/" + lat2 + "/" + long1 + "/" + long2, function (data) {
+                console.log(data)
+
+                for (var i = 0; i < data.length; i++) {
+                    //===================== CHECK THE JSON WHEN WE MERGE=================//
+                    var latLng = new google.maps.LatLng(data[i].latitude, data[i].longitude);
+                    var marker = new google.maps.Marker({
+                        position: latLng,
+                        map: map
+                    });
+                }
+            })
+
+        })
+    }
+
     navigator.geolocation.getCurrentPosition(function (position) {
 
         userLocation = {
@@ -46,6 +83,7 @@ $(document).ready(function () {
                             // location.replace("/login");
                             console.log("this is the data response ")
                             window.location = currentUrl + "/home"
+                            nearMe()
                         }
                     }
                 );
@@ -72,6 +110,7 @@ $(document).ready(function () {
                 type: "POST",
                 data: userInfo
             })
+            nearMe()
 
 
             //             $.ajax("/api/users", {
@@ -120,41 +159,6 @@ $(document).ready(function () {
         });
 
 
-        $("#search").on("click", function (event) {
-            navigator.geolocation.getCurrentPosition(function (position) {
-
-                userLocation = {
-                    lat: position.coords.latitude,
-                    long: position.coords.longitude
-                }
-
-                var lat1;
-                var lat2;
-                var long1;
-                var long2;
-
-
-
-                lat1 = userLocation.lat + .05
-                lat2 = userLocation.lat - .05
-                long1 = userLocation.long + .05
-                long2 = userLocation.long - .05
-
-                $.get("/api/spots/" + lat1 + "/" + lat2 + "/" + long1 + "/" + long2, function (data) {
-                    console.log(data)
-
-                    for (var i = 0; i < data.length; i++) {
-                        //===================== CHECK THE JSON WHEN WE MERGE=================//
-                        var latLng = new google.maps.LatLng(data[i].latitude, data[i].longitude);
-                        var marker = new google.maps.Marker({
-                            position: latLng,
-                            map: map
-                        });
-                    }
-                })
-
-            })
-        })
 
 
         // display the "search-destination" bar for "At Destination" option
