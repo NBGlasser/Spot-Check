@@ -16,9 +16,14 @@ var db = require("../models");
 // create an object to perform the routing functions
 var router = express.Router();
 
-// define the route to display the "login" page
+// define the route to display the "register" page
 router.get("/", function (req, res) {
     res.render("index");
+});
+
+// define the route to display the "login" page
+router.get("/", function (req, res) {
+    res.render("login");
 });
 
 // define the route to display the page with the map and the spots
