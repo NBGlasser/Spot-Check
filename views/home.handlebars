@@ -16,10 +16,11 @@
                 <div id="near-you" class="nav-link mr-2">Near You</div>
             </li>
             <li class="nav-item">
-                <div id="destination" class="nav-link">At Destination</div>
+                <div id="destination" class="nav-link mr-2">At Destination</div>
             </li>
             <li class="nav-item">
-                <a id="spot-claimed" href="/spot-claimed" class="nav-link">Spot Claimed</a>
+                <div id="spot-claimed" class="nav-link">Spot Claimed</div>
+                {{!-- <a id="spot-claimed" href="/spot-claimed" class="nav-link mr-2">Spot Claimed</a> --}}
             </li>
         </ul>
     </div>
@@ -53,27 +54,40 @@
         </div>
     </div>
 
+    {{!-- card to display the spot claimed --}}
+    <div class="row mt-4">
+        <div class="col-sm-12 col-md-8 col-lg-8 text-center mx-auto">
+            <div id="spot" class="card" style="display:none">
+                <div id="spot-claimed-title" class="card-header font-weight-bold">Spot you claimed</div>
+                <div class="card-body text-center mx-auto">
+                    <form class="mt-3 text-left">
+                        <div id="spot-info" class="text-center"></div>
+                        <button id="not-available-btn" type="submit" class="btn bg-danger">The spot wasn't available!</button>
+                        <button id="leave-spot-btn" type="submit" class="btn bg-success">I am leaving the spot!</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     {{!-- buttons for the different kinds of parking --}}
     <div class="row">
         <div class="col-sm-12">
-            <button id="btn-occupied" class="btn btn-lg bg-danger mr-2 mt-2" type="submit">Open > 30 min</button>
-            <button id="btn-free" class="btn btn-lg bg-success mr-2 mt-2" type="submit">Recently Open</button>
-            <button id="btn-recently" class="btn btn-lg bg-warning mt-2" type="submit" x>Open Soon</button>
+            <div id="buttons" style="display:block">
+                <button id="btn-occupied" class="btn btn-lg bg-danger mr-2 mt-2" type="submit">Open > 30 min</button>
+                <button id="btn-free" class="btn btn-lg bg-success mr-2 mt-2" type="submit">Recently Open</button>
+                <button id="btn-recently" class="btn btn-lg bg-warning mt-2" type="submit">Open Soon</button>
+            </div>
         </div>
     </div>
 
     {{!-- card to list the results --}}
     <div class="row mt-4">
-        <div class="col-sm-12 col-md-12 col-lg-10 text-center mx-auto">
-            <div id="card-results" class="card">
+        <div class="col-sm-12 col-md-12 col-lg-10 mx-auto">
+            <div id="card-results" class="card" style="display:block">
                 <div id="results-title" class="card-header font-weight-bold">Claim your spot!</div>
-                <div id="results-form" class="card-body">
-                    <ul class="list-group">
-                        {{!-- set up for partials when the dataset is done --}}
-                        {{#each put-name-table-for-spots-info}}
-                        {{> list-spots/spot-check }}
-                        {{/each}}
-                    </ul>
+                <div id="results-form" class="card-body text-left">
+                    <ul id="spot-data" class="list-group"></ul>
                 </div>
             </div>
         </div>
@@ -99,7 +113,7 @@
                 };
 
                 infoWindow.setPosition(pos);
-                infoWindow.setContent('Location found.');
+                infoWindow.setContent('Your position');
                 infoWindow.open(map);
                 map.setCenter(pos);
             }, function () {

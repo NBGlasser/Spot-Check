@@ -37,9 +37,9 @@ router.get("/home", function (req, res) {
 // =================== Sophie ================================
 
 // define the route to display the spot info once the user has claimed the spot
-router.get("/spot-claimed", function (req, res) {
-    res.render("spot-claimed");
-});
+// router.get("/spot-claimed", function (req, res) {
+//     res.render("spot-claimed");
+// });
 
 // ===========================================================
 
@@ -60,21 +60,23 @@ router.get("/api/spots", function (req, res) {
 router.get("/api/spots/:lat1/:lat2/:long1/:long2", function (req, res) {
     var lat1 = req.params.lat1;
     var lat2 = req.params.lat2;
-    var long1  = "-" + req.params.long1;
-    var long2  = "-" + req.params.long2;
+    var long1  = req.params.long1;
+    var long2  = req.params.long2;
 
     var where ={
          where: {
-            latitude: {[Op.between]: [lat1, lat2] },
+            latitude: {[Op.between]: [lat2, lat1] },
             longitude: {[Op.between]: [long2, long1]}
          }
     }
     
+
     
     console.log("this is the param 1 " + where)
     db.spots.findAll(where).then(function (dbSearchSpots) {
         console.log("this is dbsearchspots " + dbSearchSpots);
         res.json(dbSearchSpots);
+     
     });
 })
 // Louis
@@ -132,6 +134,50 @@ router.post("/api/history", function (req, res) {
 
 
 // Louis
+
+// ================ Sophie ===================
+
+// define the route to update the data in oneDay_db
+router.put("/api/spots/:id", function(req, res) {
+    // call the update method from sequelize to change the state of a bucket-list item
+    db.spots.update({
+        occupied: req.body.occupied,
+    },
+    {
+        where: {
+            id: req.params.id,
+        }
+    }).then(function() {
+        db.spots.findOne({
+            where: {
+                id: req.params.id
+            }
+        }).then(function(data) {
+            res.json(data);
+            // console.log(data);
+
+            // var dataSpot = [];
+            // dataSpot.push(data.dataValues)
+
+            // console.log(dataSpot);
+
+            // res.redirect("/spot-claimed");
+
+            // var hbsObject = {
+            //     object: dataSpot[0],
+            // }
+
+            // console.log(hbsObject);
+
+            // res.render("spot-claimed", hbsObject);
+
+        })
+
+            
+    });
+});
+
+// ===========================================
 
 
 

@@ -26,9 +26,19 @@ $(document).ready(function () {
             long2 = userLocation.long - .05
 
             $.get("/api/spots/" + lat1 + "/" + lat2 + "/" + long1 + "/" + long2, function (data) {
-                console.log(data)
+                console.log(data);
 
                 for (var i = 0; i < data.length; i++) {
+                    // ================= Sophie ==================
+                    var list = $("<li>").addClass("mt-4").text("Spot " + data[i].id);
+                    var paragraph = $("<p>").addClass("mb-0").text("Latitude: " + data[i].latitude + " - Longitude: " + data[i].longitude);
+                    if (data[i].occupied === false) {
+                        var button = $("<button>").attr("data-id", data[i].id).attr("data-lat", data[i].latitude).attr("data-long", data[i].longitude).addClass("btn btn-lg bg-success claim-btn").text("Claim");
+                    } else if (data[i].occupied === true) {
+                        var button = $("<button>").addClass("btn btn-lg bg-danger occupied-btn").text("Occupied");
+                    }
+                    $("#spot-data").append(list, paragraph, button);
+                    // ===========================================
                     //===================== CHECK THE JSON WHEN WE MERGE=================//
                     var latLng = new google.maps.LatLng(data[i].latitude, data[i].longitude);
                     var marker = new google.maps.Marker({
@@ -100,7 +110,7 @@ $(document).ready(function () {
 
     $("#login-form").on("submit", function (event) {
         event.preventDefault();
-        nearMe()
+        // nearMe()
 
         var userInfo = {
             phoneNum: $("#phone-number").val(),
@@ -130,100 +140,151 @@ $(document).ready(function () {
         //         })
     })
 
-    $("#search-destination").on("submit", function (event) {
-        // prevent the page to refresh
-        event.preventDefault();
+    // $("#search-destination").on("submit", function (event) {
+    //     // prevent the page to refresh
+    //     event.preventDefault();
 
-        // grab the values
-        var street = $("#street").val().trim();
-        var city = $("#city").val().trim();
-        var state = $("#state").val().trim();
+    //     // grab the values
+    //     var street = $("#street").val().trim();
+    //     var city = $("#city").val().trim();
+    //     var state = $("#state").val().trim();
 
-        //  query for ajax
-        var queryURL = "/maps.googleapis.com/maps/api/geocode/json?address=" + street + "," + city + "," + state + "&key=AIzaSyBLbZS2RmuzjLUIzfK3zrTLbKybGkcaD-E"
+    //     //  query for ajax
+    //     var queryURL = "/maps.googleapis.com/maps/api/geocode/json?address=" + street + "," + city + "," + state + "&key=AIzaSyBLbZS2RmuzjLUIzfK3zrTLbKybGkcaD-E"
 
-        var lat1;
-        var lat2;
-        var long1;
-        var long2;
+    //     var lat1;
+    //     var lat2;
+    //     var long1;
+    //     var long2;
 
-        $.ajax({
-            url: queryURL,
-            method: "GET"
-        }).then(function (response) {
+    //     $.ajax({
+    //         url: queryURL,
+    //         method: "GET"
+    //     }).then(function (response) {
 
-            var newLoc = {
-                lat: response.results.geometry.location.lat,
-                lng: response.results.geometry.location.lng
-            }
+    //         var newLoc = {
+    //             lat: response.results.geometry.location.lat,
+    //             lng: response.results.geometry.location.lng
+    //         }
 
-            lat1 = response.results.geometry.location.lat + .05
-            lat2 = response.results.geometry.location.lat - .05
-            long1 = response.results.geometry.location.lng + .05
-            long2 = response.results.geometry.location.lng - .05
+    //         lat1 = response.results.geometry.location.lat + .05
+    //         lat2 = response.results.geometry.location.lat - .05
+    //         long1 = response.results.geometry.location.lng + .05
+    //         long2 = response.results.geometry.location.lng - .05
 
-            $.get("/api/spots/" + lat1 + "/" + lat2 + "/" + long1 + "/" + long2, function (data) {
-                console.log(data)
+    //         $.get("/api/spots/" + lat1 + "/" + lat2 + "/" + long1 + "/" + long2, function (data) {
+    //             console.log(data)
 
-                for (var i = 0; i < data.length; i++) {
-                    var latLng = new google.maps.LatLng(data[i].latitude, data[i].longitude);
-                    var marker = new google.maps.Marker({
-                        position: latLng,
-                        map: map
-                    });
-                }
-                map.setCenter(newLoc)
-            })
+    //             for (var i = 0; i < data.length; i++) {
+    //                 var latLng = new google.maps.LatLng(data[i].latitude, data[i].longitude);
+    //                 var marker = new google.maps.Marker({
+    //                     position: latLng,
+    //                     map: map
+    //                 });
+    //             }
 
-        })
+    //             map.setCenter(newLoc)
+    //         })
 
-
-
-    })
-
-
-    $("#submit").on("click", function (event) {
-
-        navigator.geolocation.getCurrentPosition(function (position) {
-
-            userLocation = {
-                lat: position.coords.latitude,
-                long: position.coords.longitude
-            }
+    //     })
 
 
 
-            $.get("/api/spots/" + lat1 + "/" + lat2 + "/" + long1 + "/" + long2, function (data) {
-                console.log(data)
-                //                 $.ajax("/api/spots", {
-                //                     type: "POST",
-                //                     data: userInfo
-                //                 }).then(
-                //                     window.location = currentUrl + "/home"
-                //                 )
+    // })
 
-                $.ajax("/api/spots", {
-                    type: "POST",
-                    data: userLocation
-                }).then(
-                    window.location = currentUrl + "/home"
-                )
-            });
-        });
-    });
+
+    // $("#submit").on("click", function (event) {
+
+    //     navigator.geolocation.getCurrentPosition(function (position) {
+
+    //         userLocation = {
+    //             lat: position.coords.latitude,
+    //             long: position.coords.longitude
+    //         }
 
 
 
+    //         $.get("/api/spots/" + lat1 + "/" + lat2 + "/" + long1 + "/" + long2, function (data) {
+    //             console.log(data)
+    //             //                 $.ajax("/api/spots", {
+    //             //                     type: "POST",
+    //             //                     data: userInfo
+    //             //                 }).then(
+    //             //                     window.location = currentUrl + "/home"
+    //             //                 )
 
-    // display the "search-destination" bar for "At Destination" option
+    //             $.ajax("/api/spots", {
+    //                 type: "POST",
+    //                 data: userLocation
+    //             }).then(
+    //                 window.location = currentUrl + "/home"
+    //             )
+    //         });
+    //     });
+    // });
+
+
+
+
+    // display the "search-destination" bar and hide the "spot" card for "At Destination" option
     $("#destination").on("click", function () {
         $("#search-destination").attr("style", "display:block");
+        $("#spot").attr("style", "display:none");
+        $("#card-results").attr("style", "display:block");
+        $("#buttons").attr("style", "display:block");
+
     });
 
 
-    // hide the "search-destination" bar for "near you" option
+    // hide the "search-destination" bar and the "spot" card for "near you" option
     $("#near-you").on("click", function () {
         $("#search-destination").attr("style", "display:none");
+        $("#spot").attr("style", "display:none");
+        $("#card-results").attr("style", "display:block");
+        $("#buttons").attr("style", "display:block");
+    });
+
+    // hide the "search-destination" bar and the "results" card for "spot-claimed" option
+    $("#spot-claimed").on("click", function () {
+        $("#search-destination").attr("style", "display:none");
+        $("#spot").attr("style", "display:block");
+        $("#card-results").attr("style", "display:none");
+        $("#buttons").attr("style", "display:none");
+    });
+    
+    $(document).on("click", ".claim-btn", function() {
+        // grab the info of the spot corresponding to the button that has been clicked
+        var spotId = $(this).data("id");
+        $(this).addClass("bg-danger").text("Occupied");
+        // var spotLat = $(this).data("lat");
+        // var spotLong= $(this).data("long");
+        // change the state of the spot
+        var newState = true;
+
+        // grab the info about the spot from the button clicked
+        var spotNewState = {
+            occupied: newState,
+        }
+        
+        $.ajax("/api/spots/" + spotId, {
+            type: "PUT",
+            data: spotNewState
+        }).then(function(data) {
+            console.log("silly sophie");
+            
+            console.log(data);
+
+            var spotInfo = $("<p>").text("Spot: " + data.id + " - Location: " + data.latitude + " ; " + data.longitude);
+            $("#spot-info").append(spotInfo);
+
+            // location.reload();
+
+
+
+            
+
+        });
+        
     });
 
 
