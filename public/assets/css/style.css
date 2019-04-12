@@ -30,6 +30,11 @@
     color: white;
 }
 
+#enter-spot {
+    width: 20%;
+    background-color: #0000ff; 
+}
+
 /* media queries to hide the name on small screens and just display the logo */
 @media screen and (max-width: 450px) {
     #menu-button, #results-title {

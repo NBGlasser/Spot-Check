@@ -18,28 +18,23 @@ $(document).ready(function () {
             var long1;
             var long2;
 
-
-
             lat1 = userLocation.lat + .05
             lat2 = userLocation.lat - .05
             long1 = userLocation.long + .05
             long2 = userLocation.long - .05
 
             $.get("/api/spots/" + lat1 + "/" + lat2 + "/" + long1 + "/" + long2, function (data) {
-                console.log(data);
 
                 for (var i = 0; i < data.length; i++) {
-                    // ================= Sophie ==================
-                    var list = $("<li>").addClass("mt-4").text("Spot " + data[i].id);
-                    var paragraph = $("<p>").addClass("mb-0").text("Latitude: " + data[i].latitude + " - Longitude: " + data[i].longitude);
+                    // list only the available spots
                     if (data[i].occupied === false) {
+                        var list = $("<li>").addClass("mt-4").text("Spot " + data[i].id);
+                        var paragraph = $("<p>").addClass("mb-0").text("Latitude: " + data[i].latitude + " - Longitude: " + data[i].longitude);
                         var button = $("<button>").attr("data-id", data[i].id).attr("data-lat", data[i].latitude).attr("data-long", data[i].longitude).addClass("btn btn-lg bg-success claim-btn").text("Claim");
-                    } else if (data[i].occupied === true) {
-                        var button = $("<button>").addClass("btn btn-lg bg-danger occupied-btn").text("Occupied");
                     }
                     $("#spot-data").append(list, paragraph, button);
-                    // ===========================================
-                    //===================== CHECK THE JSON WHEN WE MERGE=================//
+                    
+                    // display the markers on the map
                     var latLng = new google.maps.LatLng(data[i].latitude, data[i].longitude);
                     var marker = new google.maps.Marker({
                         position: latLng,
@@ -51,15 +46,7 @@ $(document).ready(function () {
         })
     }
 
-    nearMe()
-
-    // navigator.geolocation.getCurrentPosition(function (position) {
-
-    //     userLocation = {
-    //         lat: position.coords.latitude,
-    //         long: position.coords.longitude
-    //     }
-
+    nearMe();
 
     // ------------------- Sophie ----------------------
 
@@ -224,15 +211,13 @@ $(document).ready(function () {
     // });
 
 
-
-
     // display the "search-destination" bar and hide the "spot" card for "At Destination" option
     $("#destination").on("click", function () {
         $("#search-destination").attr("style", "display:block");
         $("#spot").attr("style", "display:none");
         $("#card-results").attr("style", "display:block");
         $("#buttons").attr("style", "display:block");
-
+        // location.reload();
     });
 
 
@@ -242,6 +227,7 @@ $(document).ready(function () {
         $("#spot").attr("style", "display:none");
         $("#card-results").attr("style", "display:block");
         $("#buttons").attr("style", "display:block");
+        // location.reload();
     });
 
     // hide the "search-destination" bar and the "results" card for "spot-claimed" option
@@ -278,10 +264,6 @@ $(document).ready(function () {
             $("#spot-info").append(spotInfo);
 
             // location.reload();
-
-
-
-            
 
         });
         

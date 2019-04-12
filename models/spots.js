@@ -21,12 +21,12 @@ module.exports = function(sequelize, DataTypes) {
                 allowNull: false
             }
         });
-        // spots.belongsTo(models.blocks,{
+    };
+    return spots;
+};
+
+// spots.belongsTo(models.blocks,{
         //     foreignKey: {
         //         allowNull: false
         //     }
         // });
-
-    };
-    return spots;
-};
