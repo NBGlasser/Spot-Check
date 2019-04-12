@@ -178,37 +178,30 @@ $(document).ready(function () {
 
 
     // })
+    
+
+    $("#enter-spot").on("click", function (event) {
+
+        navigator.geolocation.getCurrentPosition(function (position) {
+
+            userLocation = {
+                lat: position.coords.latitude,
+                long: position.coords.longitude
+            }
 
 
-    // $("#submit").on("click", function (event) {
 
-    //     navigator.geolocation.getCurrentPosition(function (position) {
-
-    //         userLocation = {
-    //             lat: position.coords.latitude,
-    //             long: position.coords.longitude
-    //         }
-
-
-
-    //         $.get("/api/spots/" + lat1 + "/" + lat2 + "/" + long1 + "/" + long2, function (data) {
-    //             console.log(data)
-    //             //                 $.ajax("/api/spots", {
-    //             //                     type: "POST",
-    //             //                     data: userInfo
-    //             //                 }).then(
-    //             //                     window.location = currentUrl + "/home"
-    //             //                 )
-
-    //             $.ajax("/api/spots", {
-    //                 type: "POST",
-    //                 data: userLocation
-    //             }).then(
-    //                 window.location = currentUrl + "/home"
-    //             )
-    //         });
-    //     });
-    // });
+            
+                $.ajax("/api/spots", {
+                    type: "POST",
+                    data: userLocation
+                }).then(
+                    window.location = currentUrl + "/home",
+                    $("#modal-result").modal("toggle")
+                )
+            
+        });
+    });
 
 
     // display the "search-destination" bar and hide the "spot" card for "At Destination" option
