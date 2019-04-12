@@ -74,9 +74,11 @@
     <div class="row">
         <div class="col-sm-12">
             <div id="buttons" style="display:block">
-                <button id="btn-occupied" class="btn btn-lg bg-danger mr-2 mt-2" type="submit">Open > 30 min</button>
+                <button id="enter-spot" class="btn btn-lg mt-3 mb-2 text-white" type="submit">Enter a spot!</button>
+                <hr>
+                {{!-- <button id="btn-occupied" class="btn bg-danger mr-2 mt-2" type="submit">Open > 30 min</button>
                 <button id="btn-free" class="btn btn-lg bg-success mr-2 mt-2" type="submit">Recently Open</button>
-                <button id="btn-recently" class="btn btn-lg bg-warning mt-2" type="submit">Open Soon</button>
+                <button id="btn-recently" class="btn btn-lg bg-warning mt-2" type="submit">Open Soon</button> --}}
             </div>
         </div>
     </div>
@@ -93,6 +95,20 @@
         </div>
     </div>
 
+    {{!-- modal to say that the spot has been entered --}}
+    <div class="modal fade" id="modal-result" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3 class="modal-title">Your spot has been entered!</h3>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+          </div>
+        </div>
+    </div>
+
+
+
 </div>
 
 <script>
@@ -100,7 +116,7 @@
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
             center: { lat: 0, lng: 0 },
-            zoom: 4
+            zoom: 14
         });
         infoWindow = new google.maps.InfoWindow;
 
