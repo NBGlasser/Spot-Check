@@ -28,9 +28,9 @@ $(document).ready(function () {
                 for (var i = 0; i < data.length; i++) {
                     // list the info and display the markers only for the spots available
                     if (data[i].occupied === false) {
-                        var list = $("<li>").addClass("mt-4").text("Spot " + data[i].id);
-                        var paragraph = $("<p>").addClass("mb-0").text("Latitude: " + data[i].latitude + " - Longitude: " + data[i].longitude);
-                        var button = $("<button>").attr("data-id", data[i].id).attr("data-lat", data[i].latitude).attr("data-long", data[i].longitude).addClass("btn btn-lg bg-success claim-btn").text("Claim");
+                        var list = $("<li>").addClass("mt-4 spot-available ml-4 font-weight-bold").text("Spot " + data[i].id);
+                        var paragraph = $("<p>").addClass("mb-1 ml-4 spot-available").text("Latitude: " + data[i].latitude + " - Longitude: " + data[i].longitude);
+                        var button = $("<button>").attr("data-id", data[i].id).attr("data-lat", data[i].latitude).attr("data-long", data[i].longitude).addClass("btn btn-lg bg-success ml-4 claim-btn").text("Claim");
                         // display the markers on the map
                         var latLng = new google.maps.LatLng(data[i].latitude, data[i].longitude);
                         var marker = new google.maps.Marker({
@@ -142,37 +142,38 @@ $(document).ready(function () {
         $("#search-destination").attr("style", "display:none");
     });
 
-    // event listener on the "claim" button
+    // event listener on the "claim" buttons
     $(document).on("click", ".claim-btn", function() {
-        // grab the info of the spot corresponding to the button that has been clicked
+        // grab the info of the spot corresponding
+        // to the button that has been clicked
         var spotId = $(this).data("id");
         var spotLat = $(this).data("lat");
         var spotLong= $(this).data("long");
 
-        // store those info in the browser local storage
-        // so we can grab them on the "spot-claimed" page
+        // clear the local storage from previous data
+        // store those new info in
         localStorage.clear();
         localStorage.setItem("spotId", spotId);
         localStorage.setItem("spotLat", spotLat);
         localStorage.setItem("spotLong", spotLong);
 
-        // change the state of the spot
+        // change the status of the spot
         var newState = true;
 
-        // grab the info about the spot from the button clicked
+        // store this new status in an object
         var spotNewState = {
             occupied: newState,
         }
         
+        // post request to update the status of the spot
         $.ajax("/api/spots/" + spotId, {
             type: "PUT",
             data: spotNewState
-        }).then(function(data) {
-            // console.log("silly sophie");
+        }).then(function() {
+            // redirect the user to the spot claimed page
             location.replace("/spot-claimed");
 
         });
-        
     });
 
 

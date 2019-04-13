@@ -12,6 +12,11 @@
     font-size: 1.5rem;
 }
 
+.spot-available {
+    color: #0000ff;
+    font-size: 1.3rem;
+}
+
 #near-you:hover, #destination:hover, #spot-claimed:hover {
     font-weight: bold;
 }
@@ -33,6 +38,10 @@
 #enter-spot {
     width: 20%;
     background-color: #0000ff; 
+}
+
+.claim-btn {
+    width: 20%;
 }
 
 /* media queries to hide the name on small screens and just display the logo */
