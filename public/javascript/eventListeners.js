@@ -189,14 +189,16 @@ $(document).ready(function () {
                 long: position.coords.longitude
             }
 
+            console.log("This is position " + position.coords.latitude)
 
 
+            console.log("this is userlocation " + userLocation)
             
-                $.ajax("/api/spots", {
+                $.ajax("/api/3p/spots", {
                     type: "POST",
                     data: userLocation
                 }).then(
-                    window.location = currentUrl + "/home",
+                    // window.location = currentUrl + "/home",
                     $("#modal-result").modal("toggle")
                 )
             

@@ -130,6 +130,27 @@ router.post("/api/history", function (req, res) {
          
     });
 
+// Louis
+// Need to fix the userID
+    router.post("/api/3p/spots", function (req, res) {
+
+        var newSpot = {
+            latitude: req.body.lat,
+            longitude: req.body.long,
+            occupied: false,
+            userId: "1"
+        };
+        console.log(req.body.lat)
+        console.log("this is new spot" + newSpot);
+    
+        db.spots.create(newSpot).then(function() {
+                res.end();
+    
+            });
+             
+        });
+    
+
 
 
 
