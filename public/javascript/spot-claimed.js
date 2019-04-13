@@ -5,14 +5,14 @@ $("#spot-info").append(spotId, spotLocation);
 
 
 // event listener on the "not available" button
-$("#not-available-btn").on("click", function() {
+$("#not-available-btn").on("click", function () {
     // redirect to the home page
     location.replace("/home");
 });
 
 
 // event listener on the "leavong spot button" button
-$("#leave-spot-btn").on("click", function() {
+$("#leave-spot-btn").on("click", function () {
     // grab the info of the spot freed
     // which are in local storage
     var spotFreed = {
@@ -23,7 +23,7 @@ $("#leave-spot-btn").on("click", function() {
     $.ajax("/api/spot-freed", {
         type: "PUT",
         data: spotFreed
-    }).then(function() {
+    }).then(function () {
         location.replace("/home");
     });
 });
