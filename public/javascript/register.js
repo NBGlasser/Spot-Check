@@ -14,7 +14,7 @@ navigator.geolocation.getCurrentPosition(function (position) {
 // event listener on the "register" form
 $("#register-form").on("submit", function (event) {
     event.preventDefault();
-    // nearMe()
+    localStorage.clear();
     console.log(userLocation);
     // grab the two password inputs
     var pwd = $("#password").val().trim();
