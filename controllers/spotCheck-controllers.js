@@ -37,9 +37,9 @@ router.get("/home", function (req, res) {
 // =================== Sophie ================================
 
 // define the route to display the spot info once the user has claimed the spot
-// router.get("/spot-claimed", function (req, res) {
-//     res.render("spot-claimed");
-// });
+router.get("/spot-claimed", function (req, res) {
+    res.render("spot-claimed");
+});
 
 // ===========================================================
 
@@ -69,8 +69,6 @@ router.get("/api/spots/:lat1/:lat2/:long1/:long2", function (req, res) {
             longitude: {[Op.between]: [long2, long1]}
          }
     }
-    
-
     
     console.log("this is the param 1 " + where)
     db.spots.findAll(where).then(function (dbSearchSpots) {
@@ -114,8 +112,6 @@ router.post("/api/new-user", function (req, res) {
 // Louis, adding user searches to the history table
 router.post("/api/history", function (req, res) {
 
-
-
     var historyInfo = {
         phoneNumber: req.body.phoneNum,
         lat: req.body.lat,
@@ -146,20 +142,16 @@ router.post("/api/history", function (req, res) {
         db.spots.create(newSpot).then(function() {
                 res.end();
     
-            });
-             
         });
+             
+    });
     
-
-
-
-
-
 // Louis
 
 // ================ Sophie ===================
 
-// define the route to update the data in oneDay_db
+// define the route to update the status of the spot once it
+// has been claimed by a user
 router.put("/api/spots/:id", function(req, res) {
     // call the update method to update the status of the spot
     db.spots.update({
@@ -170,35 +162,25 @@ router.put("/api/spots/:id", function(req, res) {
             id: req.params.id,
         }
     }).then(function() {
-        // get the info related to the spot we updated
-        db.spots.findOne({
-            where: {
-                id: req.params.id
-            }
-        }).then(function(data) {
-            res.json(data);
-        })
-
-            
+        res.end();      
     });
 });
 
-// console.log(data);
-
-            // var dataSpot = [];
-            // dataSpot.push(data.dataValues)
-
-            // console.log(dataSpot);
-
-            // res.redirect("/spot-claimed");
-
-            // var hbsObject = {
-            //     object: dataSpot[0],
-            // }
-
-            // console.log(hbsObject);
-
-            // res.render("spot-claimed", hbsObject);
+// define the route to update the status of the spot once it
+// has been freed by a user
+router.put("/api/spot-freed", function(req, res) {
+    // call the update method to update the status of the spot
+    db.spots.update({
+        occupied: req.body.occupied,
+    },
+    {
+        where: {
+            id: req.body.spotId,
+        }
+    }).then(function() {
+        res.end();      
+    });
+})
 
 // ===========================================
 
