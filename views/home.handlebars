@@ -76,7 +76,7 @@
     </div>
 
     {{!-- modal to say that the spot has been entered --}}
-    <div class="modal fade" id="modal-result" tabindex="-1" role="dialog">
+    <div class="modal fade" id="modal-spot-entered" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-scrollable" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -85,6 +85,24 @@
             </div>
             <div class="modal-body">
               <h4>Your spot has been entered!</h4>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-lg close-modal" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    {{!-- modal to say that the user already claimed a spot --}}
+    <div class="modal fade" id="modal-spot-claimed-already" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3 class="modal-title">You claimed a spot already!</h3>
+              <button type="button" class="close close-modal" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <h4>Please free the spot you claimed before claiming another one.</h4>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-lg close-modal" data-dismiss="modal">Close</button>

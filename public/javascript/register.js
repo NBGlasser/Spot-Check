@@ -1,3 +1,6 @@
+// clear local storage when a new user registers
+localStorage.clear();
+
 // grab the current url of the page
 var currentUrl = window.location.origin;
 
@@ -14,7 +17,6 @@ navigator.geolocation.getCurrentPosition(function (position) {
 // event listener on the "register" form
 $("#register-form").on("submit", function (event) {
     event.preventDefault();
-    localStorage.clear();
     console.log(userLocation);
     // grab the two password inputs
     var pwd = $("#password").val().trim();
