@@ -14,7 +14,8 @@ navigator.geolocation.getCurrentPosition(function (position) {
 // event listener on the "login" form
 $("#login-form").on("submit", function (event) {
     event.preventDefault();
-    // nearMe()
+    
+    localStorage.clear();
 
     var userInfo = {
         phoneNum: $("#phone-number").val(),
