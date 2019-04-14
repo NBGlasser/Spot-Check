@@ -35,6 +35,7 @@ $(document).ready(function () {
                         var latLng = new google.maps.LatLng(data[i].latitude, data[i].longitude);
                         var marker = new google.maps.Marker({
                             position: latLng,
+                            title: "Spot " + data[i].id,
                             map: map
                         });
                     }
@@ -117,7 +118,7 @@ $(document).ready(function () {
                 // ======================= Sophie =====================
                 }).then(function() {
                     // display the modal
-                    $("#modal-result").modal("toggle");
+                    $("#modal-spot-entered").modal("toggle");
                     // event listener on the close button of the modal
                     // to reload the page once the modal is closed and
                     // display the marker on the map as well as list the spot in the "results" card
@@ -144,36 +145,44 @@ $(document).ready(function () {
 
     // event listener on the "claim" buttons
     $(document).on("click", ".claim-btn", function() {
-        // grab the info of the spot corresponding
-        // to the button that has been clicked
-        var spotId = $(this).data("id");
-        var spotLat = $(this).data("lat");
-        var spotLong= $(this).data("long");
+        // if the user has already claimed a spot
+        if (localStorage.getItem("spotAlreadyClaimed") === "true") {
+            // display a modal saying to free the former spot before claiming another one
+            $("#modal-spot-claimed-already").modal("toggle");
+        } else {
+            // swith to true the "spotAlreadyClaimed" item stored in localStorage
+            localStorage.setItem("spotAlreadyClaimed", "true");
+            // grab the info of the spot corresponding
+            // to the button that has been clicked
+            var spotId = $(this).data("id");
+            var spotLat = $(this).data("lat");
+            var spotLong= $(this).data("long");
 
-        // clear the local storage from previous data
-        // store those new info in
-        localStorage.clear();
-        localStorage.setItem("spotId", spotId);
-        localStorage.setItem("spotLat", spotLat);
-        localStorage.setItem("spotLong", spotLong);
+            // clear the local storage from previous data
+            // store those new info in
+            // localStorage.clear();
+            localStorage.setItem("spotId", spotId);
+            localStorage.setItem("spotLat", spotLat);
+            localStorage.setItem("spotLong", spotLong);
 
-        // change the status of the spot
-        var newState = true;
+            // change the status of the spot
+            var newState = true;
 
-        // store this new status in an object
-        var spotNewState = {
-            occupied: newState,
-        }
+            // store this new status in an object
+            var spotNewState = {
+                occupied: newState,
+            }
         
-        // post request to update the status of the spot
-        $.ajax("/api/spots/" + spotId, {
-            type: "PUT",
-            data: spotNewState
-        }).then(function() {
-            // redirect the user to the spot claimed page
-            location.replace("/spot-claimed");
+            // post request to update the status of the spot
+            $.ajax("/api/spots/" + spotId, {
+                type: "PUT",
+                data: spotNewState
+            }).then(function() {
+                // redirect the user to the spot claimed page
+                location.replace("/spot-claimed");
 
-        });
+            });
+        }
     });
 
 

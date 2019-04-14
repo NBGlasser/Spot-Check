@@ -133,7 +133,7 @@ router.post("/api/history", function (req, res) {
         var newSpot = {
             latitude: req.body.lat,
             longitude: req.body.long,
-            occupied: false,
+            // occupied: false,
             userId: "1"
         };
         console.log(req.body.lat)
